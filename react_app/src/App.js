@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import WeatherIcon from './components/WeatherIcon';
+import WeatherDetails from './components/WeatherDetails'
 
 class App extends Component {
   constructor(){
@@ -52,18 +54,18 @@ class App extends Component {
   render() {
     let {time, city, temperature, weatherCode, fetching, icon} = this.state;
     return (
-      <div className="App">
-      {fetching ? 
-        (<div className="load">....Loading</div>)
+      fetching ? 
+        (<div className="app">....Loading</div>)
         :
-        (<div className="dataWeather">
-          <span className='city'>{city}</span>
-          <p className='time'>{time}</p>
-          <p className='temperature'>{temperature}</p>
-          <p className='weatherCode'>{weatherCode}</p>
-        </div>
-        )}
-      </div>
+        ( <div className="app" data-hour={time}>
+            <WeatherIcon 
+              time={time} 
+              weatherCode={weatherCode} />
+            <WeatherDetails
+              city={city}
+              temp={temperature} />
+          </div>
+        )
     );
   }
 }
